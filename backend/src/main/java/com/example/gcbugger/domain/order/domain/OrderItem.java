@@ -1,6 +1,6 @@
 package com.example.gcbugger.domain.order.domain;
 
-import com.example.gcbugger.domain.menu.domain.Menu;
+import com.example.gcbugger.domain.menu.domain.vo.Menu;
 
 public class OrderItem {
 

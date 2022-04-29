@@ -1,4 +1,4 @@
 package com.example.gcbugger.domain.order.domain;
 
-public interface OrderItemRepository {
+public interface OrderMenuRepository {
 }

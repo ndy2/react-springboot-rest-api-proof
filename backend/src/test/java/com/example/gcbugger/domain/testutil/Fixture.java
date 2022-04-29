@@ -1,25 +1,39 @@
 package com.example.gcbugger.domain.testutil;
 
-import com.example.gcbugger.domain.menu.domain.vo.Beverage;
-import com.example.gcbugger.domain.menu.domain.vo.Bugger;
-import com.example.gcbugger.domain.menu.domain.vo.BuggerCombo;
-import com.example.gcbugger.domain.menu.domain.vo.SideMenu;
+import com.example.gcbugger.domain.menu.domain.entity.Menu;
+import com.example.gcbugger.domain.menu.domain.entity.MenuOption;
+
+import static com.example.gcbugger.domain.menu.domain.MenuType.*;
 
 public class Fixture {
 
-    public static Bugger bugger() {
-        return new Bugger("불고기 버거", 2000, 450);
+    /**
+     * 메뉴
+     */
+    public static Menu bugger() {
+        return new Menu( BUGGER, "불고기 버거",2000, 450);
     }
 
-    public static SideMenu sideMenu() {
-        return new SideMenu("감자 튀김", 1500, 300);
+    public static Menu sideMenu() {
+        return new Menu(SIDE_MENU, "감자 튀김", 1500, 300);
     }
 
-    public static Beverage beverage() {
-        return new Beverage("제로 콜라", 1500, 0);
+    public static Menu beverage() {
+        return new Menu(BEVERAGE, "제로 콜라", 1500, 0);
     }
 
-    public static BuggerCombo buggerCombo() {
-        return new BuggerCombo("불고기 버거 세트", 3500, 750, bugger());
+    public static Menu buggerCombo() {
+        return new Menu(BUGGER_COMBO, "불고기 버거 세트", 3500, 750);
+    }
+
+    /**
+     * 메뉴 옵션
+     */
+    public static MenuOption buggerOption() {
+        return new MenuOption(BUGGER, "피클을 빼줘", 0);
+    }
+
+    public static MenuOption buggerComboOption(){
+        return new MenuOption(BUGGER_COMBO, "제로 콜라로 바꿔줘", 0);
     }
 }

@@ -1,7 +1,7 @@
 package com.example.gcbugger.domain.menu.service;
 
 import com.example.gcbugger.domain.menu.domain.MenuType;
-import com.example.gcbugger.domain.menu.domain.vo.Menu;
+import com.example.gcbugger.domain.menu.domain.entity.Menu;
 import com.example.gcbugger.domain.menu.domain.MenuRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

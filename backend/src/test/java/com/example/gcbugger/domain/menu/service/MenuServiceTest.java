@@ -1,6 +1,6 @@
 package com.example.gcbugger.domain.menu.service;
 
-import com.example.gcbugger.domain.menu.domain.vo.Menu;
+import com.example.gcbugger.domain.menu.domain.entity.Menu;
 import com.example.gcbugger.domain.menu.domain.MenuRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

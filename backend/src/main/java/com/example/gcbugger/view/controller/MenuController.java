@@ -1,6 +1,6 @@
 package com.example.gcbugger.view.controller;
 
-import com.example.gcbugger.domain.menu.domain.vo.Menu;
+import com.example.gcbugger.domain.menu.domain.entity.Menu;
 import com.example.gcbugger.domain.menu.service.MenuService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;

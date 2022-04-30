@@ -38,9 +38,12 @@ class JdbcMenuOptionRepositoryTest {
         //initial data (see schema.sql)
 
         //when
-        List<MenuOption> foundMenuOptions = menuOptionRepository.findByMenuTypeId(buggerComboType().getId());
+        List<MenuOption> foundMenuOptions = menuOptionRepository.findByMenuTypeId(2L);
 
         //then
+        assertThat(foundMenuOptions).hasSize(2);
+        assertThat(foundMenuOptions.get(0).getMenuType().getName()).isEqualTo("BUGGER_COMBO");
+        assertThat(foundMenuOptions.get(0).getMenuType().getId()).isEqualTo(2);
         assertThat(foundMenuOptions).extracting("name")
                 .containsExactlyInAnyOrder("제로 콜라로 바꿔줘", "감튀를 맥너겟으로 빠꿔줘");
         assertThat(foundMenuOptions).extracting("price")

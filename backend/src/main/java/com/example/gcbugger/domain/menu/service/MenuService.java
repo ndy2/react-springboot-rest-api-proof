@@ -20,11 +20,11 @@ public class MenuService {
     }
 
     public List<Menu> findByType(MenuType menuType) {
-        return menuRepository.findByTypeId(menuType.getId());
+        return menuRepository.findByType(menuType);
     }
 
-    public Menu findByTypeAndName(MenuType menuType, String name) {
-        return menuRepository.findByTypeIdAndName(menuType.getId(), name)
-                .orElseThrow(() -> new IllegalArgumentException(MessageFormat.format("no such menu {0}", name)));
+    public Menu findById(Long id) {
+        return menuRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException(MessageFormat.format("no such menu of id : {0}", id)));
     }
 }

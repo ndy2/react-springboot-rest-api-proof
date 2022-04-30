@@ -19,8 +19,8 @@ import java.util.Optional;
 public class JdbcMenuRepository implements MenuRepository {
 
     private static final String findAllQuery = "SELECT * FROM menu m LEFT JOIN menu_type t on m.menu_type_id=t.menu_type_id";
-    private static final String findByTypeQuery = "SELECT * FROM menu WHERE menu_type_id= :typeId";
-    private static final String findByTypeAndNameQuery = "SELECT * FROM menu WHERE menu_type_id= :typeId and name= :name";
+    private static final String findByTypeQuery = "SELECT * FROM menu m LEFT JOIN menu_type t on m.menu_type_id=t.menu_type_id WHERE menu_type_name= :typeName";
+    private static final String findByIdQuery = "SELECT * FROM menu m LEFT JOIN menu_type t on m.menu_type_id=t.menu_type_id WHERE menu_id= :menuId";
 
     private final NamedParameterJdbcTemplate jdbcTemplate;
 
@@ -29,17 +29,18 @@ public class JdbcMenuRepository implements MenuRepository {
         return jdbcTemplate.query(findAllQuery, menuRowMapper);
     }
 
+
     @Override
-    public List<Menu> findByTypeId(Long typeId) {
-        Map<String, Object> paramMap = Collections.singletonMap("typeId", typeId);
+    public List<Menu> findByType(MenuType type) {
+        Map<String, Object> paramMap = Collections.singletonMap("typeName", type.getName());
         return jdbcTemplate.query(findByTypeQuery, paramMap, menuRowMapper);
     }
 
     @Override
-    public Optional<Menu> findByTypeIdAndName(Long typeId, String name) {
+    public Optional<Menu> findById(Long id) {
         try {
-            Map<String, Object> paramMap = Map.of("typeId", typeId, "name", name);
-            return Optional.of(jdbcTemplate.queryForObject(findByTypeAndNameQuery, paramMap, menuRowMapper));
+            Map<String, Object> paramMap = Map.of("menuId", id);
+            return Optional.of(jdbcTemplate.queryForObject(findByIdQuery, paramMap, menuRowMapper));
         } catch (EmptyResultDataAccessException e) {
             return Optional.empty();
         }
@@ -47,8 +48,8 @@ public class JdbcMenuRepository implements MenuRepository {
 
     private static final RowMapper<Menu> menuRowMapper = (rs, i) -> new Menu(
             rs.getLong("menu_id"),
-            new MenuType(rs.getLong("menu_type_id"), rs.getString("name")),
-            rs.getString("name"),
-            rs.getInt("price"),
-            rs.getInt("kcal"));
+            new MenuType(rs.getLong("menu_type_id"), rs.getString("menu_type_name")),
+            rs.getString("menu_name"),
+            rs.getInt("menu_price"),
+            rs.getInt("menu_kcal"));
 }

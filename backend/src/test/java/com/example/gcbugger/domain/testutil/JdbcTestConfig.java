@@ -20,7 +20,7 @@ public class JdbcTestConfig {
     public DataSource dataSource() {
         log.info("test datasource configured");
         return DataSourceBuilder.create()
-                .url("jdbc:h2:mem:testdb;INIT=RUNSCRIPT FROM 'classpath:/schema.sql';DB_CLOSE_DELAY=-1")
+                .url("jdbc:h2:mem:test;INIT=RUNSCRIPT FROM 'classpath:/schema.sql';DB_CLOSE_DELAY=-1")
                 .build();
     }
 

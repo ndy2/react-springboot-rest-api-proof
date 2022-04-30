@@ -3,3 +3,20 @@ Accept: application/json
 
 ###
 
+GET http://localhost:8080/api/v1/menu
+Content-Type: application/json
+Accept: application/json
+
+{
+"menuType" : "BUGGER"
+}
+
+###
+
+GET http://localhost:8080/api/v1/menu/1
+Accept: application/json
+
+###
+
+GET http://localhost:8080/api/v1/menu/10
+Accept: application/json

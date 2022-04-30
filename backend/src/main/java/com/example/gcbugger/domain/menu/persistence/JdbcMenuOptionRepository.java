@@ -16,7 +16,7 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class JdbcMenuOptionRepository implements MenuOptionRepository {
 
-    private static final String findByMenuTypeQuery = "SELECT * FROM menu_option  WHERE menu_type_id= :menuTypeId";
+    private static final String findByMenuTypeQuery = "SELECT * FROM menu_option o LEFT JOIN menu_type t ON t.menu_type_id = o.menu_type_id WHERE o.menu_type_id= :menuTypeId";
     private final NamedParameterJdbcTemplate jdbcTemplate;
 
     @Override
@@ -28,8 +28,8 @@ public class JdbcMenuOptionRepository implements MenuOptionRepository {
 
     private static final RowMapper<MenuOption> menuOptionRowMapper = (rs, i) -> new MenuOption(
             rs.getLong("menu_option_id"),
-            new MenuType(rs.getLong("menu_type_id"), rs.getString("name")),
-            rs.getString("name"),
-            rs.getInt("price")
+            new MenuType(rs.getLong("menu_type_id"), rs.getString("menu_type_name")),
+            rs.getString("menu_option_name"),
+            rs.getInt("menu_option_price")
     );
 }

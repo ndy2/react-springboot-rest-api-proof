@@ -55,7 +55,7 @@ class JdbcMenuRepositoryTest{
         //initial data (see schema.sql)
 
         //when
-        List<Menu> foundMenus = menuRepository.findByTypeId(buggerType().getId());
+        List<Menu> foundMenus = menuRepository.findByType(buggerType());
 
         //then
         assertThat(foundMenus).extracting("name")
@@ -72,7 +72,7 @@ class JdbcMenuRepositoryTest{
         //initial data (see schema.sql)
 
         //when
-        Optional<Menu> foundMenu = menuRepository.findByTypeIdAndName(buggerType().getId(), "빅맥");
+        Optional<Menu> foundMenu = menuRepository.findById(2L);
 
         //then
         assertThat(foundMenu).isPresent();

@@ -8,7 +8,6 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 import java.util.Optional;
 
-import static com.example.gcbugger.domain.menu.domain.MenuType.BUGGER;
 import static com.example.gcbugger.domain.testutil.Fixture.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
@@ -43,13 +42,13 @@ class MenuServiceTest {
     void 성공_메뉴_타입으로_조회(){
         //given
         List<Menu> menus = List.of(bugger(), bugger(), sideMenu(), beverage());
-        when(menuRepository.findByType(BUGGER)).thenReturn(menus);
+        when(menuRepository.findByTypeId(buggerType().getId())).thenReturn(menus);
 
         //when
-        List<Menu> foundMenus = menuService.findByType(BUGGER);
+        List<Menu> foundMenus = menuService.findByType(buggerType());
 
         //then
-        verify(menuRepository).findByType(BUGGER);
+        verify(menuRepository).findByTypeId(buggerType().getId());
         assertThat(foundMenus).hasSameElementsAs(menus);
     }
 
@@ -57,13 +56,13 @@ class MenuServiceTest {
     void 성공_메뉴_타입과_이름으로_조회(){
         //given
         Menu menu = beverage();
-        when(menuRepository.findByTypeAndName(BUGGER, "불고기 버거")).thenReturn(Optional.of(menu));
+        when(menuRepository.findByTypeIdAndName(buggerType().getId(), "불고기 버거")).thenReturn(Optional.of(menu));
 
         //when
-        Menu foundMenu = menuService.findByTypeAndName(BUGGER, "불고기 버거");
+        Menu foundMenu = menuService.findByTypeAndName(buggerType(), "불고기 버거");
 
         //then
-        verify(menuRepository).findByTypeAndName(BUGGER, "불고기 버거");
+        verify(menuRepository).findByTypeIdAndName(buggerType().getId(), "불고기 버거");
         assertThat(foundMenu).isEqualTo(menu);
     }
 
@@ -71,11 +70,11 @@ class MenuServiceTest {
     void 실패_메뉴_타입과_이름으로_조회_널을_전달받는경우(){
         //given
         Menu menu = null;
-        when(menuRepository.findByTypeAndName(BUGGER, "불고기 버거")).thenReturn(Optional.ofNullable(menu));
+        when(menuRepository.findByTypeIdAndName(buggerType().getId(), "불고기 버거")).thenReturn(Optional.ofNullable(menu));
 
         //then
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> menuService.findByTypeAndName(BUGGER, "불고기 버거"));
-        verify(menuRepository).findByTypeAndName(BUGGER, "불고기 버거");
+                .isThrownBy(() -> menuService.findByTypeAndName(buggerType(), "불고기 버거"));
+        verify(menuRepository).findByTypeIdAndName(buggerType().getId(), "불고기 버거");
     }
 }

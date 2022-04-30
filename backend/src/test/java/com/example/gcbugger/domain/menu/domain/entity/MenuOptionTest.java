@@ -1,11 +1,10 @@
 package com.example.gcbugger.domain.menu.domain.entity;
 
-import com.example.gcbugger.domain.menu.domain.MenuType;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 
-import static com.example.gcbugger.domain.menu.domain.MenuType.BUGGER;
+import static com.example.gcbugger.domain.testutil.Fixture.buggerType;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
@@ -14,12 +13,13 @@ class MenuOptionTest {
     @Test
     void 성공_생성() {
         //when
-        MenuOption menuOption = new MenuOption(1L, BUGGER, "피클을 빼줘", 0);
+        MenuOption menuOption = new MenuOption(1L, buggerType(), "피클을 빼줘", 0);
 
         //then
         assertThat(menuOption).isNotNull();
         assertThat(menuOption.getId()).isEqualTo(1L);
-        assertThat(menuOption.getMenuType()).isEqualTo(BUGGER);
+        assertThat(menuOption.getMenuType().getId()).isEqualTo(buggerType().getId());
+        assertThat(menuOption.getMenuType().getName()).isEqualTo(buggerType().getName());
         assertThat(menuOption.getName()).isEqualTo("피클을 빼줘");
         assertThat(menuOption.getPrice()).isEqualTo(0);
     }
@@ -41,7 +41,7 @@ class MenuOptionTest {
 
         //then
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> new MenuOption(1L, BUGGER, name, 0));
+                .isThrownBy(() -> new MenuOption(1L, buggerType(), name, 0));
     }
 
     @Test
@@ -51,7 +51,7 @@ class MenuOptionTest {
 
         //then
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> new MenuOption(1L, BUGGER, name, 0));
+                .isThrownBy(() -> new MenuOption(1L, buggerType(), name, 0));
     }
 
     @Test
@@ -61,6 +61,6 @@ class MenuOptionTest {
 
         //then
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> new MenuOption(1L, BUGGER, "피클을 빼줘", price));
+                .isThrownBy(() -> new MenuOption(1L, buggerType(), "피클을 빼줘", price));
     }
 }

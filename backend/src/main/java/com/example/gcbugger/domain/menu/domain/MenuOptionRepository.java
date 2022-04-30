@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface MenuOptionRepository {
 
-    List<MenuOption> findByMenuType(MenuType menuType);
+    List<MenuOption> findByMenuTypeId(Long menuTypeId);
 }

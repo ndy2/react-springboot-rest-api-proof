@@ -1,8 +1,8 @@
 package com.example.gcbugger.domain.menu.persistence;
 
 import com.example.gcbugger.domain.menu.domain.MenuRepository;
-import com.example.gcbugger.domain.menu.domain.MenuType;
 import com.example.gcbugger.domain.menu.domain.entity.Menu;
+import com.example.gcbugger.domain.menu.domain.entity.MenuType;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.RowMapper;
@@ -18,12 +18,11 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class JdbcMenuRepository implements MenuRepository {
 
+    private static final String findAllQuery = "SELECT * FROM menu m LEFT JOIN menu_type t on m.menu_type_id=t.menu_type_id";
+    private static final String findByTypeQuery = "SELECT * FROM menu WHERE menu_type_id= :typeId";
+    private static final String findByTypeAndNameQuery = "SELECT * FROM menu WHERE menu_type_id= :typeId and name= :name";
+
     private final NamedParameterJdbcTemplate jdbcTemplate;
-
-    private static final String findAllQuery = "SELECT * FROM menu";
-    private static final String findByTypeQuery = "SELECT * FROM menu WHERE type= :type";
-    private static final String findByTypeAndNameQuery = "SELECT * FROM menu WHERE type= :type and name= :name";
-
 
     @Override
     public List<Menu> findAll() {
@@ -31,15 +30,15 @@ public class JdbcMenuRepository implements MenuRepository {
     }
 
     @Override
-    public List<Menu> findByType(MenuType type) {
-        Map<String, Object> paramMap = Collections.singletonMap("type", type.toString());
+    public List<Menu> findByTypeId(Long typeId) {
+        Map<String, Object> paramMap = Collections.singletonMap("typeId", typeId);
         return jdbcTemplate.query(findByTypeQuery, paramMap, menuRowMapper);
     }
 
     @Override
-    public Optional<Menu> findByTypeAndName(MenuType type, String name) {
+    public Optional<Menu> findByTypeIdAndName(Long typeId, String name) {
         try {
-            Map<String, Object> paramMap = Map.of("type", type.toString(), "name", name);
+            Map<String, Object> paramMap = Map.of("typeId", typeId, "name", name);
             return Optional.of(jdbcTemplate.queryForObject(findByTypeAndNameQuery, paramMap, menuRowMapper));
         } catch (EmptyResultDataAccessException e) {
             return Optional.empty();
@@ -48,7 +47,7 @@ public class JdbcMenuRepository implements MenuRepository {
 
     private static final RowMapper<Menu> menuRowMapper = (rs, i) -> new Menu(
             rs.getLong("menu_id"),
-            MenuType.valueOf(rs.getString("type")),
+            new MenuType(rs.getLong("menu_type_id"), rs.getString("name")),
             rs.getString("name"),
             rs.getInt("price"),
             rs.getInt("kcal"));

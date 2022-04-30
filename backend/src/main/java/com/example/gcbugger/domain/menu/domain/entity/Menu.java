@@ -1,6 +1,5 @@
 package com.example.gcbugger.domain.menu.domain.entity;
 
-import com.example.gcbugger.domain.menu.domain.MenuType;
 import lombok.Getter;
 
 import static com.google.common.base.Preconditions.checkArgument;
@@ -9,7 +8,7 @@ import static org.springframework.util.StringUtils.hasText;
 @Getter
 public class Menu {
 
-    private Long id;
+    private final Long id;
 
     private final MenuType type;
 

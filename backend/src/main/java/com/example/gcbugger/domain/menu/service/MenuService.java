@@ -1,8 +1,8 @@
 package com.example.gcbugger.domain.menu.service;
 
-import com.example.gcbugger.domain.menu.domain.MenuType;
-import com.example.gcbugger.domain.menu.domain.entity.Menu;
 import com.example.gcbugger.domain.menu.domain.MenuRepository;
+import com.example.gcbugger.domain.menu.domain.entity.Menu;
+import com.example.gcbugger.domain.menu.domain.entity.MenuType;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -20,11 +20,11 @@ public class MenuService {
     }
 
     public List<Menu> findByType(MenuType menuType) {
-        return menuRepository.findByType(menuType);
+        return menuRepository.findByTypeId(menuType.getId());
     }
 
     public Menu findByTypeAndName(MenuType menuType, String name) {
-        return menuRepository.findByTypeAndName(menuType,name)
+        return menuRepository.findByTypeIdAndName(menuType.getId(), name)
                 .orElseThrow(() -> new IllegalArgumentException(MessageFormat.format("no such menu {0}", name)));
     }
 }

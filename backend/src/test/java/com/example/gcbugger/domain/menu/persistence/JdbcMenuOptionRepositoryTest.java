@@ -1,12 +1,11 @@
 package com.example.gcbugger.domain.menu.persistence;
 
-import com.example.gcbugger.domain.menu.domain.MenuType;
+import com.example.gcbugger.domain.menu.domain.entity.MenuType;
 import com.example.gcbugger.domain.menu.domain.entity.MenuOption;
 import com.example.gcbugger.domain.testutil.JdbcTestConfig;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
@@ -14,6 +13,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+import static com.example.gcbugger.domain.testutil.Fixture.buggerComboType;
+import static com.example.gcbugger.domain.testutil.Fixture.buggerType;
 import static org.assertj.core.api.Assertions.assertThat;
 
 
@@ -37,7 +38,7 @@ class JdbcMenuOptionRepositoryTest {
         //initial data (see schema.sql)
 
         //when
-        List<MenuOption> foundMenuOptions = menuOptionRepository.findByMenuType(MenuType.BUGGER_COMBO);
+        List<MenuOption> foundMenuOptions = menuOptionRepository.findByMenuTypeId(buggerComboType().getId());
 
         //then
         assertThat(foundMenuOptions).extracting("name")

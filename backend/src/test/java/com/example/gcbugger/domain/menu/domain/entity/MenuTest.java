@@ -1,11 +1,10 @@
 package com.example.gcbugger.domain.menu.domain.entity;
 
-import com.example.gcbugger.domain.menu.domain.MenuType;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 
-import static com.example.gcbugger.domain.menu.domain.MenuType.BUGGER;
+import static com.example.gcbugger.domain.testutil.Fixture.buggerType;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
@@ -14,12 +13,13 @@ class MenuTest {
     @Test
     void 성공_생성() {
         //when
-        Menu menu = new Menu(1L, BUGGER, "불고기 버거", 2300, 430);
+        Menu menu = new Menu(1L, buggerType(), "불고기 버거", 2300, 430);
 
         //then
         assertThat(menu).isNotNull();
         assertThat(menu.getId()).isEqualTo(1L);
-        assertThat(menu.getType()).isEqualTo(BUGGER);
+        assertThat(menu.getType().getId()).isEqualTo(buggerType().getId());
+        assertThat(menu.getType().getName()).isEqualTo(buggerType().getName());
         assertThat(menu.getName()).isEqualTo("불고기 버거");
         assertThat(menu.getPrice()).isEqualTo(2300);
         assertThat(menu.getKcal()).isEqualTo(430);
@@ -42,7 +42,7 @@ class MenuTest {
 
         //then
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> new Menu(1L, BUGGER, name, 2300, 430));
+                .isThrownBy(() -> new Menu(1L, buggerType(), name, 2300, 430));
     }
 
     @Test
@@ -52,7 +52,7 @@ class MenuTest {
 
         //then
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> new Menu(1L, BUGGER, name, 2300, 430));
+                .isThrownBy(() -> new Menu(1L, buggerType(), name, 2300, 430));
     }
 
     @Test
@@ -62,7 +62,7 @@ class MenuTest {
 
         //then
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> new Menu(1L, BUGGER, "불고기 버거", price, 430));
+                .isThrownBy(() -> new Menu(1L, buggerType(), "불고기 버거", price, 430));
     }
 
     @Test
@@ -72,6 +72,6 @@ class MenuTest {
 
         //then
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> new Menu(1L, BUGGER, "불고기 버거", 2300, kcal));
+                .isThrownBy(() -> new Menu(1L, buggerType(), "불고기 버거", 2300, kcal));
     }
 }

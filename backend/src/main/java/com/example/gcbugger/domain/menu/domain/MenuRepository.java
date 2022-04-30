@@ -9,7 +9,7 @@ public interface MenuRepository {
 
     List<Menu> findAll();
 
-    List<Menu> findByType(MenuType type);
+    List<Menu> findByTypeId(Long typeId);
 
-    Optional<Menu> findByTypeAndName(MenuType type, String name);
+    Optional<Menu> findByTypeIdAndName(Long typeId, String name);
 }

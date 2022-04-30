@@ -1,6 +1,6 @@
 package com.example.gcbugger.domain.menu.persistence;
 
-import com.example.gcbugger.domain.menu.domain.MenuType;
+import com.example.gcbugger.domain.menu.domain.entity.MenuType;
 import com.example.gcbugger.domain.menu.domain.entity.Menu;
 import com.example.gcbugger.domain.testutil.JdbcTestConfig;
 import org.junit.jupiter.api.BeforeEach;
@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Optional;
 
+import static com.example.gcbugger.domain.testutil.Fixture.buggerType;
 import static org.assertj.core.api.Assertions.assertThat;
 
 
@@ -54,7 +55,7 @@ class JdbcMenuRepositoryTest{
         //initial data (see schema.sql)
 
         //when
-        List<Menu> foundMenus = menuRepository.findByType(MenuType.BUGGER);
+        List<Menu> foundMenus = menuRepository.findByTypeId(buggerType().getId());
 
         //then
         assertThat(foundMenus).extracting("name")
@@ -71,7 +72,7 @@ class JdbcMenuRepositoryTest{
         //initial data (see schema.sql)
 
         //when
-        Optional<Menu> foundMenu = menuRepository.findByTypeAndName(MenuType.BUGGER, "빅맥");
+        Optional<Menu> foundMenu = menuRepository.findByTypeIdAndName(buggerType().getId(), "빅맥");
 
         //then
         assertThat(foundMenu).isPresent();

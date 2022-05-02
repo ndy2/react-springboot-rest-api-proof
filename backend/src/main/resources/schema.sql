@@ -54,3 +54,6 @@ CREATE TABLE menu_option
 INSERT INTO menu_option(menu_option_id, menu_type_id, menu_option_name, menu_option_price)VALUES (1, 1, '피클을 빼줘', 0);
 INSERT INTO menu_option(menu_option_id, menu_type_id, menu_option_name, menu_option_price)VALUES (2, 2, '제로 콜라로 바꿔줘', 0);
 INSERT INTO menu_option(menu_option_id, menu_type_id, menu_option_name, menu_option_price)VALUES (3, 2, '감튀를 맥너겟으로 빠꿔줘', 600);
+
+--
+

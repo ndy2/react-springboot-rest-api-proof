@@ -20,3 +20,21 @@ Accept: application/json
 
 GET http://localhost:8080/api/v1/menu/10
 Accept: application/json
+
+###
+
+POST http://localhost:8080/api/v1/order
+Content-Type: application/json
+Accept: application/json
+
+{
+  "orderMenus" : [
+    {
+      "menuId" : "2"
+    },
+    {
+      "menuId" : "1",
+      "menuOptionId" : "1"
+    }
+  ]
+}

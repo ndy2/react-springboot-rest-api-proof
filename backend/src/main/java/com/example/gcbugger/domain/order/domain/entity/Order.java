@@ -6,5 +6,5 @@ public class Order {
 
     private Long id;
     private int price;
-    private List<OrderMenu> orderItems;
+    private List<OrderMenu> orderMenus;
 }

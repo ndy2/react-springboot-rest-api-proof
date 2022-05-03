@@ -1,99 +1,8 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import React, {useState} from 'react';
-
-function Options({options}){
-    if(options.length ===0 ) return (
-        <></>
-    )
-
-    return (
-        <React.Fragment>
-            <select name="option">
-                <option value="">옵션선택</option>
-
-                {options.map(v =>
-                    <option value="1">{v.name} +{v.price}원</option>
-                )}
-
-            </select>
-        </React.Fragment>
-    )
-}
-
-function Menu(props) {
-
-    const name = props.name;
-    const price = props.price;
-    const imageUrl = props.imageUrl;
-    const options = props.options;
-
-    return (
-        <React.Fragment>
-            <img src={imageUrl} alt="빅맥"/>
-            <div> {name}</div>
-            <div> {price} 원</div>
-            <Options options={options}/>
-            <div className="col text-end action"><a className="btn btn-small btn-outline-dark" href="">추가</a></div>
-        </React.Fragment>
-    )
-}
-
-function MenuList({menus = []}) {
-    return (
-        <React.Fragment>
-            <div>
-                <table className="table">
-                    <tbody>
-                    {menus.map(v =>
-                        <tr key={v.id}>
-                            <td>
-                                <Menu name={v.name} price={v.price} imageUrl={v.imageUrl} options = {v.options}/>
-                            </td>
-                        </tr>
-                    )}
-                    </tbody>
-                </table>
-            </div>
-        </React.Fragment>
-    )
-}
-
-function SummaryItem({name}) {
-    return (
-        <React.Fragment>
-            <div className="row">
-                <h6 className="p-0">{name}</h6>
-            </div>
-        </React.Fragment>
-    )
-}
-
-function Summary({items = []}) {
-
-    const totalPrice = items.reduce((prev, curr) => prev + curr.price, 0);
-
-    return (
-        <React.Fragment>
-
-            <div className="summary p-4">
-                <div>
-                    <h5 className="m-0 p-0"><b>Summary</b></h5>
-                </div>
-
-                {items.map(v => <SummaryItem key={v.id} menuName={v.menuName}/>)
-
-                }
-
-                <div className="row pt-2 pb-2 border-top">
-                    <h5 className="col">총금액</h5>
-                    <h5 className="col text-end">{totalPrice}원</h5>
-                </div>
-                <button className="btn btn-dark col-12">주문하기</button>
-            </div>
-        </React.Fragment>
-    )
-}
+import {MenuList} from "./components/MenuList";
+import {Summary} from "./components/Summary";
 
 
 function App() {
@@ -111,7 +20,7 @@ function App() {
 
 
     const [items, setItems] = useState([
-        {id: '1', name: '불고기 버거', price:2300}
+        {id: '1', menuName: '불고기 버거', price:2300}
     ])
 
     return (

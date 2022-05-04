@@ -1,8 +1,10 @@
 package com.example.gcbugger.domain.menu.domain.entity;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
+@EqualsAndHashCode
 public class MenuType {
 
     private final Long id;

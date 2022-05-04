@@ -1,9 +1,9 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.css';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {MenuList} from "./components/MenuList";
 import {Summary} from "./components/Summary";
-
+import axios from "axios";
 
 function App() {
 
@@ -30,6 +30,12 @@ function App() {
 
         console.log(items);
     }
+
+    //메뉴 정보 axios.get
+    useEffect(() => {
+        axios.get('http://localhost:8080/api/v1/menu')
+            .then(v => setMenus(v.data));
+    }, [])
 
     return (
         <div className="App">

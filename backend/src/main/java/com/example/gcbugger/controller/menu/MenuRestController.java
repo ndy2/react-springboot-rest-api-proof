@@ -7,6 +7,7 @@ import com.example.gcbugger.domain.menu.service.MenuOptionService;
 import com.example.gcbugger.domain.menu.service.MenuService;
 import com.example.gcbugger.domain.menu.service.MenuTypeService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
@@ -17,6 +18,7 @@ import java.util.Map;
 import static com.example.gcbugger.controller.menu.MenuResponse.of;
 import static java.util.stream.Collectors.*;
 
+@Slf4j
 @RestController
 @RequestMapping(value = "/api/v1/menu", produces = "application/json; charset=utf-8")
 @RequiredArgsConstructor
@@ -29,7 +31,7 @@ public class MenuRestController {
 
     @GetMapping
     public List<MenuResponse> findAll() {
-
+        log.info("MenuRestController.findAll");
         Map<MenuType, List<MenuOption>> map = new HashMap<>();
         for (MenuType menuType : menuTypeService.findAll()) {
             map.put(menuType,menuOptionService.findByMenuTypeId(menuType.getId()));
@@ -42,7 +44,7 @@ public class MenuRestController {
 
     @GetMapping("/{id}")
     public MenuResponse findById(@PathVariable Long id){
-
+        log.info("MenuRestController.findById({})", id);
         Menu menu = menuService.findById(id);
         List<MenuOption> options = menuOptionService.findByMenuTypeId(menu.getType().getId());
 

@@ -2,8 +2,9 @@ import React, {useState} from "react";
 import {SummaryItem} from "./SummaryItem";
 
 export function Summary({items = []}) {
-
     const totalPrice = items.reduce((prev, curr) => prev + curr.price, 0);
+    let data = items.reduce((prev, curr) => prev + curr!=null&&curr.option!=null?curr.option.price:0, 0);
+    console.log(data);
     return (
         <React.Fragment>
 
@@ -11,7 +12,7 @@ export function Summary({items = []}) {
                 <div>
                     <h5 className="m-0 p-0"><b>Summary</b></h5>
                 </div>
-                {items.map(v => <SummaryItem key={v.id} menuName={v.menuName}/>)}
+                {items.map(v => <SummaryItem key={v.id} {...v}/>)}
 
                 <div className="row pt-2 pb-2 border-top">
                     <h5 className="col">총금액</h5>

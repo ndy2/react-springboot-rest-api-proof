@@ -1,7 +1,8 @@
 import React, {useState} from "react";
 import {Menu} from "./Menu";
 
-export function MenuList({menus = []}) {
+export function MenuList({menus = [], onAddClick}) {
+
     return (
         <React.Fragment>
             <div>
@@ -10,7 +11,7 @@ export function MenuList({menus = []}) {
                     {menus.map(v =>
                         <tr key={v.id}>
                             <td>
-                                <Menu name={v.name} price={v.price} imageUrl={v.imageUrl} options={v.options}/>
+                                <Menu {...v} onAddClick = {onAddClick}/>
                             </td>
                         </tr>
                     )}

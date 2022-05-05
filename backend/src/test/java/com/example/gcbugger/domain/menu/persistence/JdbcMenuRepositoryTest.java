@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.data.jdbc.DataJdbcTest;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
-import org.springframework.test.context.TestPropertySource;
 
 import java.util.List;
 import java.util.Optional;
@@ -15,7 +14,6 @@ import static com.example.gcbugger.domain.testutil.Fixture.buggerType;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DataJdbcTest
-@TestPropertySource("classpath:application-test.properties")
 class JdbcMenuRepositoryTest{
 
     @Autowired NamedParameterJdbcTemplate jdbcTemplate;

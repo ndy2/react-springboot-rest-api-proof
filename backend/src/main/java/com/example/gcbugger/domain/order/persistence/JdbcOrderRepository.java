@@ -32,7 +32,7 @@ public class JdbcOrderRepository implements OrderRepository {
         int count = jdbcTemplate.update(insertQuery, toParamSource(order), keyHolder);
         checkState(count == 1, "amount of affected row of table orders caused by order insertion is not 1");
 
-        order.setId(keyHolder.getKeyAs(Long.class));
+        order.setId(keyHolder.getKey().longValue());
         return order;
     }
 

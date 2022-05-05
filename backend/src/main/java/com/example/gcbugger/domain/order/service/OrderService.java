@@ -18,15 +18,18 @@ public class OrderService {
     private final OrderMenuRepository orderMenuRepository;
 
     @Transactional
-    public void createOrder(int price, List<OrderMenu> orderMenus) {
+    public Order createOrder(int price, List<OrderMenu> orderMenus) {
         Order order = Order.create(orderMenus);
+
         checkPrice(price, order);
-
         order = orderRepository.insert(order);
-        Long orderId = order.getId();
 
+        Long orderId = order.getId();
         orderMenus.forEach(om -> om.setId(orderId));
-        orderMenuRepository.insertAll(orderMenus);
+        orderMenus = orderMenuRepository.insertAll(orderId, orderMenus);
+
+        order.changeOrderMenus(orderMenus);
+        return order;
     }
 
     private void checkPrice(int price, Order order) {

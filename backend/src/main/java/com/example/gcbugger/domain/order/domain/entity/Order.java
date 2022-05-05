@@ -13,7 +13,7 @@ public class Order {
 
     private Long id;
     private final int price;
-    private final List<OrderMenu> orderMenus;
+    private List<OrderMenu> orderMenus;
     private final LocalDateTime createdAt;
 
     private Order(List<OrderMenu> orderMenus) {
@@ -43,6 +43,10 @@ public class Order {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public void changeOrderMenus(List<OrderMenu> orderMenus){
+        this.orderMenus = orderMenus;
     }
 
     public boolean isOfPrice(int price) {

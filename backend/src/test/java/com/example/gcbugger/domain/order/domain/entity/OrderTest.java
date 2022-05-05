@@ -1,6 +1,5 @@
 package com.example.gcbugger.domain.order.domain.entity;
 
-import com.example.gcbugger.domain.testutil.Fixture;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
@@ -8,8 +7,8 @@ import org.junit.jupiter.params.provider.NullAndEmptySource;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import static com.example.gcbugger.domain.testutil.Fixture.order;
-import static com.example.gcbugger.domain.testutil.Fixture.orderMenu;
+import static com.example.gcbugger.domain.fixture.Fixture.order;
+import static com.example.gcbugger.domain.fixture.Fixture.orderMenu;
 import static java.time.LocalDateTime.now;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;

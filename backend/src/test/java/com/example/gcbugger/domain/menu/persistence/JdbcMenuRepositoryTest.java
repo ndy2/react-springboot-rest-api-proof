@@ -10,7 +10,7 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import java.util.List;
 import java.util.Optional;
 
-import static com.example.gcbugger.domain.testutil.Fixture.buggerType;
+import static com.example.gcbugger.domain.fixture.Fixture.buggerType;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DataJdbcTest

@@ -13,11 +13,11 @@ class MenuTest {
     @Test
     void 성공_생성() {
         //when
-        Menu menu = new Menu(1L, buggerType(), "불고기 버거", 2300, 430, "image.png");
+        Menu menu = Menu.create(buggerType(), "불고기 버거", 2300, 430, "image.png");
 
         //then
         assertThat(menu).isNotNull();
-        assertThat(menu.getId()).isEqualTo(1L);
+        assertThat(menu.getId()).isNull();
         assertThat(menu.getType().getId()).isEqualTo(buggerType().getId());
         assertThat(menu.getType().getName()).isEqualTo(buggerType().getName());
         assertThat(menu.getName()).isEqualTo("불고기 버거");
@@ -32,7 +32,7 @@ class MenuTest {
         MenuType menuType = null;
 
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> new Menu(1L, menuType, "불고기 버거", 2300, 430, "image.png"));
+                .isThrownBy(() -> Menu.create(menuType, "불고기 버거", 2300, 430, "image.png"));
     }
 
     @NullAndEmptySource
@@ -43,7 +43,7 @@ class MenuTest {
 
         //then
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> new Menu(1L, buggerType(), name, 2300, 430, "image.png"));
+                .isThrownBy(() -> Menu.create(buggerType(), name, 2300, 430, "image.png"));
     }
 
     @Test
@@ -53,7 +53,7 @@ class MenuTest {
 
         //then
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> new Menu(1L, buggerType(), name, 2300, 430, "image.png"));
+                .isThrownBy(() -> Menu.create(buggerType(), name, 2300, 430, "image.png"));
     }
 
     @Test
@@ -63,7 +63,7 @@ class MenuTest {
 
         //then
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> new Menu(1L, buggerType(), "불고기 버거", price, 430, "image.png"));
+                .isThrownBy(() -> Menu.create(buggerType(), "불고기 버거", price, 430, "image.png"));
     }
 
     @Test
@@ -73,6 +73,6 @@ class MenuTest {
 
         //then
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> new Menu(1L, buggerType(), "불고기 버거", 2300, kcal, "image.png"));
+                .isThrownBy(() -> Menu.create(buggerType(), "불고기 버거", 2300, kcal, "image.png"));
     }
 }

@@ -22,7 +22,7 @@ public class JdbcMenuTypeRepository implements MenuTypeRepository {
         return jdbcTemplate.query(findAllQuery, menuTypeRowMapper);
     }
 
-    private static final RowMapper<MenuType> menuTypeRowMapper = (rs, i) -> new MenuType(
+    private static final RowMapper<MenuType> menuTypeRowMapper = (rs, i) -> MenuType.bind(
             rs.getLong("menu_type_id"),
             rs.getString("menu_type_name")
     );

@@ -1,3 +1,6 @@
+DROP TABLE IF EXISTS order_menu;
+DROP TABLE IF EXISTS orders;
+
 DROP TABLE IF EXISTS menu_option;
 DROP TABLE IF EXISTS menu;
 DROP TABLE IF EXISTS menu_type;
@@ -74,9 +77,9 @@ CREATE TABLE order_menu
     menu_option_id BIGINT,
 
     primary key (order_menu_id),
-    CONSTRAINT fk_menu_to_menu_type FOREIGN KEY (order_id) REFERENCES orders(order_id),
-    CONSTRAINT fk_menu_to_menu_type FOREIGN KEY (menu_id) REFERENCES menu(menu_id),
-    CONSTRAINT fk_menu_to_menu_type FOREIGN KEY (menu_option_id) REFERENCES menu_option(menu_option_id)
+    CONSTRAINT fk_order_menu_to_orders FOREIGN KEY (order_id) REFERENCES orders(order_id),
+    CONSTRAINT fk_order_menu_to_menu FOREIGN KEY (menu_id) REFERENCES menu(menu_id),
+    CONSTRAINT fk_order_menu_to_menu_option FOREIGN KEY (menu_option_id) REFERENCES menu_option(menu_option_id)
 );
 --
 

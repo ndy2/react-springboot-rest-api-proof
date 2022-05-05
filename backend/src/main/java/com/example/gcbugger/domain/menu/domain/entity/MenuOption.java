@@ -16,12 +16,12 @@ public class MenuOption {
 
     private final int price;
 
-    public MenuOption(MenuType menu, String name, int price) {
+    private MenuOption(MenuType menu, String name, int price) {
 
         this(null, menu, name, price);
     }
 
-    public MenuOption(Long id, MenuType menuType, String name, int price) {
+    private MenuOption(Long id, MenuType menuType, String name, int price) {
         checkArgument(menuType != null, "menuType must be provided");
         checkArgument(hasText(name), "name must be provided");
         checkArgument(name.length() <= 50, "name length must be less than 50 inclusive");
@@ -31,5 +31,13 @@ public class MenuOption {
         this.menuType = menuType;
         this.name = name;
         this.price = price;
+    }
+
+    public static MenuOption bind(Long id, MenuType menuType, String name, int price){
+        return new MenuOption(id, menuType, name, price);
+    }
+
+    public static MenuOption create(MenuType menuType, String name, int price){
+        return new MenuOption(menuType, name, price);
     }
 }

@@ -19,7 +19,7 @@ public class OrderService {
 
     @Transactional
     public void createOrder(int price, List<OrderMenu> orderMenus) {
-        Order order = new Order(price, orderMenus);
+        Order order = Order.create(price, orderMenus);
         order = orderRepository.insert(order);
         orderMenuRepository.insertAll(order.getId(), orderMenus);
     }

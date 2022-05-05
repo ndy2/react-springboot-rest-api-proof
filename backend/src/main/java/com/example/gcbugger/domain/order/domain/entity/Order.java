@@ -15,14 +15,22 @@ public class Order {
     private final List<OrderMenu> orderMenus;
     private final LocalDateTime createdAt;
 
-    public Order(int price, List<OrderMenu> orderMenus) {
+    private Order(int price, List<OrderMenu> orderMenus) {
         this(null, price, orderMenus, now());
     }
 
-    public Order(Long id, int price, List<OrderMenu> orderMenus, LocalDateTime createdAt) {
+    private Order(Long id, int price, List<OrderMenu> orderMenus, LocalDateTime createdAt) {
         this.id = id;
         this.price = price;
         this.orderMenus = orderMenus;
         this.createdAt = createdAt;
+    }
+
+    public static Order create(int price, List<OrderMenu> orderMenus){
+        return new Order(price, orderMenus);
+    }
+
+    public static Order bind(Long id, int price, List<OrderMenu> orderMenus, LocalDateTime createdAt){
+        return new Order(id, price, orderMenus, createdAt);
     }
 }

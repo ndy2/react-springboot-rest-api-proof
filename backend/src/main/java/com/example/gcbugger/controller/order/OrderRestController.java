@@ -24,5 +24,6 @@ public class OrderRestController {
         List<OrderMenu> orderMenus = orderDto.getOrderMenus().stream().map(OrderMenuDto::toEntity).collect(Collectors.toList());
         orderService.createOrder(price, orderMenus);
 
+        return new OrderResponse();
     }
 }

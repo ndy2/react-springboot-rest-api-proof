@@ -10,12 +10,21 @@ public class MenuType {
     private final Long id;
     private final String name;
 
-    public MenuType(String name) {
+    private MenuType(String name) {
         this(null, name);
     }
 
-    public MenuType(Long id, String name) {
+    private MenuType(Long id, String name) {
         this.id = id;
         this.name = name;
+    }
+
+    public static MenuType create(String name) {
+        return new MenuType(name);
+    }
+
+
+    public static MenuType bind(Long id, String name) {
+        return new MenuType(id, name);
     }
 }

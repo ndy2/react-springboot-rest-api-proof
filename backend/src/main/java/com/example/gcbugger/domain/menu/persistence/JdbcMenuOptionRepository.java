@@ -26,9 +26,9 @@ public class JdbcMenuOptionRepository implements MenuOptionRepository {
         return jdbcTemplate.query(findByMenuTypeQuery, paramMap, menuOptionRowMapper);
     }
 
-    private static final RowMapper<MenuOption> menuOptionRowMapper = (rs, i) -> new MenuOption(
+    private static final RowMapper<MenuOption> menuOptionRowMapper = (rs, i) -> MenuOption.bind(
             rs.getLong("menu_option_id"),
-            new MenuType(rs.getLong("menu_type_id"), rs.getString("menu_type_name")),
+            MenuType.bind(rs.getLong("menu_type_id"), rs.getString("menu_type_name")),
             rs.getString("menu_option_name"),
             rs.getInt("menu_option_price")
     );

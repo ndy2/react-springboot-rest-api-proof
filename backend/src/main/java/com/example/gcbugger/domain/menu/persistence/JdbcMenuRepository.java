@@ -46,9 +46,9 @@ public class JdbcMenuRepository implements MenuRepository {
         }
     }
 
-    private static final RowMapper<Menu> menuRowMapper = (rs, i) -> new Menu(
+    private static final RowMapper<Menu> menuRowMapper = (rs, i) -> Menu.bind(
             rs.getLong("menu_id"),
-            new MenuType(rs.getLong("menu_type_id"), rs.getString("menu_type_name")),
+            MenuType.bind(rs.getLong("menu_type_id"), rs.getString("menu_type_name")),
             rs.getString("menu_name"),
             rs.getInt("menu_price"),
             rs.getInt("menu_kcal"),

@@ -13,11 +13,11 @@ class MenuOptionTest {
     @Test
     void 성공_생성() {
         //when
-        MenuOption menuOption = new MenuOption(1L, buggerType(), "피클을 빼줘", 0);
+        MenuOption menuOption = MenuOption.create(buggerType(), "피클을 빼줘", 0);
 
         //then
         assertThat(menuOption).isNotNull();
-        assertThat(menuOption.getId()).isEqualTo(1L);
+        assertThat(menuOption.getId()).isNull();
         assertThat(menuOption.getMenuType().getId()).isEqualTo(buggerType().getId());
         assertThat(menuOption.getMenuType().getName()).isEqualTo(buggerType().getName());
         assertThat(menuOption.getName()).isEqualTo("피클을 빼줘");
@@ -30,7 +30,7 @@ class MenuOptionTest {
         MenuType menuType = null;
 
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> new MenuOption(1L, menuType, "피클을 빼줘", 0));
+                .isThrownBy(() -> MenuOption.create(menuType, "피클을 빼줘", 0));
     }
 
     @NullAndEmptySource
@@ -41,7 +41,7 @@ class MenuOptionTest {
 
         //then
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> new MenuOption(1L, buggerType(), name, 0));
+                .isThrownBy(() -> MenuOption.create(buggerType(), name, 0));
     }
 
     @Test
@@ -51,7 +51,7 @@ class MenuOptionTest {
 
         //then
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> new MenuOption(1L, buggerType(), name, 0));
+                .isThrownBy(() -> MenuOption.create(buggerType(), name, 0));
     }
 
     @Test
@@ -61,6 +61,6 @@ class MenuOptionTest {
 
         //then
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> new MenuOption(1L, buggerType(), "피클을 빼줘", price));
+                .isThrownBy(() -> MenuOption.create(buggerType(), "피클을 빼줘", price));
     }
 }

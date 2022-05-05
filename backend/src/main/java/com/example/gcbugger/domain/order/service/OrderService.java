@@ -19,8 +19,16 @@ public class OrderService {
 
     @Transactional
     public void createOrder(int price, List<OrderMenu> orderMenus) {
-        Order order = Order.create(price, orderMenus);
+        Order order = Order.create(orderMenus);
+        checkPrice(price, order);
+
         order = orderRepository.insert(order);
         orderMenuRepository.insertAll(order.getId(), orderMenus);
+    }
+
+    private void checkPrice(int price, Order order) {
+        if(!order.isOfPrice(price)){
+            throw new IllegalArgumentException(String.format("given price %d is not equal to calculated price %d", price, order.getPrice()));
+        }
     }
 }

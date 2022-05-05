@@ -71,10 +71,11 @@ CREATE TABLE orders
 
 CREATE TABLE order_menu
 (
-    order_menu_id  BIGINT NOT NULL AUTO_INCREMENT,
-    order_id       BIGINT NOT NULL,
-    menu_id        BIGINT NOT NULL,
-    menu_option_id BIGINT,
+    order_menu_id    BIGINT NOT NULL AUTO_INCREMENT,
+    order_id         BIGINT NOT NULL,
+    menu_id          BIGINT NOT NULL,
+    menu_option_id   BIGINT,
+    order_menu_price BIGINT NOT NULL,
 
     primary key (order_menu_id),
     CONSTRAINT fk_order_menu_to_orders FOREIGN KEY (order_id) REFERENCES orders(order_id),

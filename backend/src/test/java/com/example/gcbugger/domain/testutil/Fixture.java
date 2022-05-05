@@ -3,6 +3,10 @@ package com.example.gcbugger.domain.testutil;
 import com.example.gcbugger.domain.menu.domain.entity.Menu;
 import com.example.gcbugger.domain.menu.domain.entity.MenuOption;
 import com.example.gcbugger.domain.menu.domain.entity.MenuType;
+import com.example.gcbugger.domain.order.domain.entity.Order;
+import com.example.gcbugger.domain.order.domain.entity.OrderMenu;
+
+import java.util.List;
 
 
 public class Fixture {
@@ -55,5 +59,19 @@ public class Fixture {
 
     public static MenuOption buggerComboOption() {
         return MenuOption.create(buggerComboType(), "제로 콜라로 바꿔줘", 0);
+    }
+
+    /**
+     * 주문
+     */
+    public static Order order(){
+        return Order.create(List.of(orderMenu(), orderMenu()));
+    }
+
+    /**
+     * 주문 메뉴
+     */
+    public static OrderMenu orderMenu(){
+        return OrderMenu.create(1L, 1L, 1L, 2000);
     }
 }

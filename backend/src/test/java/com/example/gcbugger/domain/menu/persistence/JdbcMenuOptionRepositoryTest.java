@@ -1,26 +1,19 @@
 package com.example.gcbugger.domain.menu.persistence;
 
-import com.example.gcbugger.domain.menu.domain.entity.MenuType;
 import com.example.gcbugger.domain.menu.domain.entity.MenuOption;
-import com.example.gcbugger.domain.testutil.JdbcTestConfig;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.data.jdbc.DataJdbcTest;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.test.context.TestPropertySource;
 
 import java.util.List;
 
-import static com.example.gcbugger.domain.testutil.Fixture.buggerComboType;
-import static com.example.gcbugger.domain.testutil.Fixture.buggerType;
 import static org.assertj.core.api.Assertions.assertThat;
 
-
-@Transactional
-@SpringJUnitConfig
-@ContextConfiguration(classes = JdbcTestConfig.class)
+@DataJdbcTest
+@TestPropertySource("classpath:application-test.properties")
 class JdbcMenuOptionRepositoryTest {
 
     @Autowired

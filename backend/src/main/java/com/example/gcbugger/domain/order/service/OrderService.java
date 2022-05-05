@@ -23,7 +23,10 @@ public class OrderService {
         checkPrice(price, order);
 
         order = orderRepository.insert(order);
-        orderMenuRepository.insertAll(order.getId(), orderMenus);
+        Long orderId = order.getId();
+
+        orderMenus.forEach(om -> om.setId(orderId));
+        orderMenuRepository.insertAll(orderMenus);
     }
 
     private void checkPrice(int price, Order order) {

@@ -72,6 +72,6 @@ public class Fixture {
      * 주문 메뉴
      */
     public static OrderMenu orderMenu(){
-        return OrderMenu.create(1L, 1L, 1L, 2000);
+        return OrderMenu.create(1L, 2L, 3L, 2000);
     }
 }

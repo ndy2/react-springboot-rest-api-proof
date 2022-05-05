@@ -11,7 +11,7 @@ import static java.time.LocalDateTime.now;
 @Getter
 public class Order {
 
-    private final Long id;
+    private Long id;
     private final int price;
     private final List<OrderMenu> orderMenus;
     private final LocalDateTime createdAt;
@@ -31,7 +31,6 @@ public class Order {
         this.createdAt = createdAt;
     }
 
-
     public static Order create(List<OrderMenu> orderMenus) {
         return new Order(orderMenus);
     }
@@ -40,6 +39,10 @@ public class Order {
         checkArgument(id != null, "id must be provided for binding");
 
         return new Order(id, price, orderMenus, createdAt);
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public boolean isOfPrice(int price) {

@@ -5,5 +5,7 @@ import com.example.gcbugger.domain.order.domain.entity.OrderMenu;
 import java.util.List;
 
 public interface OrderMenuRepository {
-    void insertAll(Long orderId, List<OrderMenu> orderMenus);
+    List<OrderMenu> insertAll(List<OrderMenu> orderMenus);
+
+    OrderMenu insert(OrderMenu orderMenu);
 }

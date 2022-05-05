@@ -7,7 +7,7 @@ import static com.google.common.base.Preconditions.checkArgument;
 @Getter
 public class OrderMenu {
 
-    private final Long id;
+    private Long id;
     private final Long orderId;
     private final Long menuId;
     private final Long menuOptionId;
@@ -39,4 +39,7 @@ public class OrderMenu {
         return new OrderMenu(id, orderId, menuId, menuOptionId, price);
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
 }

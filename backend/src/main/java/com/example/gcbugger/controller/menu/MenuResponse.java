@@ -15,6 +15,7 @@ public class MenuResponse {
     private String name;
     private int price;
     private int kcal;
+    private String menuImageFileName;
 
     private List<MenuOptionResponse> options;
 
@@ -26,6 +27,7 @@ public class MenuResponse {
         response.name = menu.getName();
         response.price = menu.getPrice();
         response.kcal = menu.getKcal();
+        response.menuImageFileName = menu.getImageFileName();
 
         response.options = options.stream().map(MenuOptionResponse::of).collect(Collectors.toList());
         return response;

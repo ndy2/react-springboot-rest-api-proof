@@ -51,5 +51,6 @@ public class JdbcMenuRepository implements MenuRepository {
             new MenuType(rs.getLong("menu_type_id"), rs.getString("menu_type_name")),
             rs.getString("menu_name"),
             rs.getInt("menu_price"),
-            rs.getInt("menu_kcal"));
+            rs.getInt("menu_kcal"),
+            rs.getString("menu_image_file_name"));
 }

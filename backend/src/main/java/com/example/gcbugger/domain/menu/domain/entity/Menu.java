@@ -18,12 +18,14 @@ public class Menu {
 
     private final int kcal;
 
+    private final String imageFileName;
+
     public Menu(MenuType type, String name, int price, int kcal) {
 
-        this(null, type, name, price, kcal);
+        this(null, type, name, price, kcal, null);
     }
 
-    public Menu(Long id, MenuType type, String name, int price, int kcal) {
+    public Menu(Long id, MenuType type, String name, int price, int kcal, String imageFileName) {
         checkArgument(type != null, "type must be provided");
         checkArgument(hasText(name), "name must be provided");
         checkArgument(name.length() <= 50, "name length must be less than 50 inclusive");
@@ -35,5 +37,6 @@ public class Menu {
         this.name = name;
         this.price = price;
         this.kcal = kcal;
+        this.imageFileName = imageFileName;
     }
 }

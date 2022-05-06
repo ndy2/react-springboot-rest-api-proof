@@ -18,17 +18,6 @@ function App() {
         {id: '8', name: '코카 콜라 제로', price: 1300, imageUrl : 'https://www.mcdonalds.co.kr/upload/product/pcfile/1583890021601.png', options:[]}
     ]);
 
-
-    const [items, setItems] = useState([
-    ])
-
-    const handleAddClicked = (id, optionIdx) =>{
-        const menu = menus.find(v => v.id === id);
-
-        const foundMenu = {id : menu.id, name : menu.name, price : menu.price, imageUrl : menu.imageUrl, option : menu.options[optionIdx-2]==null?{}:menu.options[optionIdx-2]};
-        setItems([...items, {...foundMenu}]);
-    }
-
     //메뉴 정보 axios.get
     useEffect(() => {
         axios.get('http://localhost:8080/api/v1/menu')
@@ -41,6 +30,39 @@ function App() {
         }
         return data;
     }
+
+
+    const [items, setItems] = useState([
+    ])
+
+    const handleAddClicked = (id, optionIdx) =>{
+        const menu = menus.find(v => v.id === id);
+
+        const foundMenu = {id : menu.id, name : menu.name, price : menu.price, imageUrl : menu.imageUrl, option : menu.options[optionIdx-2]==null?{}:menu.options[optionIdx-2]};
+        setItems([...items, {...foundMenu}]);
+    }
+
+    const handleOrderSubmit = (order) => {
+        if (items.length === 0) {
+            alert("메뉴를 추가해 주세요!");
+        } else {
+            axios.post('http://localhost:8080/api/v1/order', {
+                price: order.price,
+                orderType: order.type,
+                orderMenus:
+                    items.map(v => ({
+                        menuId: v.menuId,
+                        menuOptionId: v.menuOptionId,
+                        price: v.price
+                    }))
+            }).then(
+                v => alert("주문이 정상적으로 접수 되었습니다"),
+                e => {
+                    alert("서버 장애");
+                    console.error(e);
+                })
+        }
+    }
     
     return (
         <div className="App">
@@ -50,7 +72,7 @@ function App() {
             <div className="card">
                 <div>
                     <MenuList menus={menus} onAddClick={handleAddClicked}/>
-                    <Summary items={items}/>
+                    <Summary items={items} onOrderSubmit={handleOrderSubmit}/>
                 </div>
             </div>
         </div>

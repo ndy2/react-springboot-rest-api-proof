@@ -2,6 +2,7 @@ package com.example.gcbugger.domain.order.service;
 
 import com.example.gcbugger.domain.order.domain.OrderMenuRepository;
 import com.example.gcbugger.domain.order.domain.OrderRepository;
+import com.example.gcbugger.domain.order.domain.OrderType;
 import com.example.gcbugger.domain.order.domain.entity.Order;
 import com.example.gcbugger.domain.order.domain.entity.OrderMenu;
 import lombok.RequiredArgsConstructor;
@@ -18,8 +19,8 @@ public class OrderService {
     private final OrderMenuRepository orderMenuRepository;
 
     @Transactional
-    public Order createOrder(int price, List<OrderMenu> orderMenus) {
-        Order order = Order.create(orderMenus);
+    public Order createOrder(OrderType orderType, int price, List<OrderMenu> orderMenus) {
+        Order order = Order.create(orderType, orderMenus);
 
         checkPrice(price, order);
         order = orderRepository.insert(order);

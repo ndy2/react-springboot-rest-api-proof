@@ -19,6 +19,7 @@ Content-Type: application/json
 Accept: application/json
 
 {
+  "orderType" : "TAKEOUT",
   "price" : 6900,
   "orderMenus" : [
     {
@@ -39,6 +40,7 @@ Content-Type: application/json
 Accept: application/json
 
 {
+  "orderType" : "store",
   "price" : 6900,
   "orderMenus" : [
     {

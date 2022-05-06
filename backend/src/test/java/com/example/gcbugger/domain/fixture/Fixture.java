@@ -3,6 +3,7 @@ package com.example.gcbugger.domain.fixture;
 import com.example.gcbugger.domain.menu.domain.entity.Menu;
 import com.example.gcbugger.domain.menu.domain.entity.MenuOption;
 import com.example.gcbugger.domain.menu.domain.entity.MenuType;
+import com.example.gcbugger.domain.order.domain.OrderType;
 import com.example.gcbugger.domain.order.domain.entity.Order;
 import com.example.gcbugger.domain.order.domain.entity.OrderMenu;
 
@@ -65,7 +66,7 @@ public class Fixture {
      * 주문
      */
     public static Order order(){
-        return Order.create(List.of(orderMenu(), orderMenu()));
+        return Order.create(OrderType.TAKEOUT, List.of(orderMenu(), orderMenu()));
     }
 
     /**

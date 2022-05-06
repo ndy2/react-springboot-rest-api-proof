@@ -20,7 +20,7 @@ public class JdbcOrderRepository implements OrderRepository {
     private final NamedParameterJdbcTemplate jdbcTemplate;
     private final KeyHolder keyHolder;
 
-    private static final String insertQuery = "INSERT INTO orders(order_price, created_at) VALUES (:orderPrice, :createdAt)";
+    private static final String insertQuery = "INSERT INTO orders(order_type, order_price, created_at) VALUES (:orderType, :orderPrice, :createdAt)";
 
     public JdbcOrderRepository(NamedParameterJdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
@@ -38,6 +38,7 @@ public class JdbcOrderRepository implements OrderRepository {
 
     private SqlParameterSource toParamSource(Order order){
         return new MapSqlParameterSource(Map.<String, Object>of(
+                "orderType", order.getOrderType().name(),
                 "orderPrice", order.getPrice(),
                 "createdAt", order.getCreatedAt()
         ));

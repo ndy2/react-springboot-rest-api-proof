@@ -3,6 +3,7 @@ package com.example.gcbugger.controller.order;
 import com.example.gcbugger.controller.order.dto.OrderMenuRequest;
 import com.example.gcbugger.controller.order.dto.OrderRequest;
 import com.example.gcbugger.controller.order.dto.OrderResponse;
+import com.example.gcbugger.domain.order.domain.OrderType;
 import com.example.gcbugger.domain.order.domain.entity.Order;
 import com.example.gcbugger.domain.order.domain.entity.OrderMenu;
 import com.example.gcbugger.domain.order.service.OrderService;
@@ -24,10 +25,11 @@ public class OrderRestController {
 
     @PostMapping
     public OrderResponse order(@RequestBody OrderRequest orderRequest){
+        OrderType orderType = OrderType.valueOf(orderRequest.getOrderType());
         int price = orderRequest.getPrice();
         List<OrderMenu> orderMenus = orderRequest.getOrderMenus().stream().map(OrderMenuRequest::toEntity).collect(Collectors.toList());
 
-        Order order = orderService.createOrder(price, orderMenus);
+        Order order = orderService.createOrder(orderType, price, orderMenus);
         return OrderResponse.of(order);
     }
 }

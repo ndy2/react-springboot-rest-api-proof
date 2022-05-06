@@ -1,5 +1,6 @@
 package com.example.gcbugger.domain.order.domain.entity;
 
+import com.example.gcbugger.domain.order.domain.OrderType;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
@@ -12,40 +13,43 @@ import static java.time.LocalDateTime.now;
 public class Order {
 
     private Long id;
+    private final OrderType orderType;
     private final int price;
     private List<OrderMenu> orderMenus;
     private final LocalDateTime createdAt;
 
-    private Order(List<OrderMenu> orderMenus) {
-        this(null, retrievePrice(orderMenus), orderMenus, now());
+    private Order(OrderType orderType, List<OrderMenu> orderMenus) {
+        this(null, orderType, retrievePrice(orderMenus), orderMenus, now());
     }
 
-    private Order(Long id, int price, List<OrderMenu> orderMenus, LocalDateTime createdAt) {
-        checkArgument(price >=0, "price must be none negative");
+    private Order(Long id, OrderType orderType, int price, List<OrderMenu> orderMenus, LocalDateTime createdAt) {
+        checkArgument(orderType != null, "orderType must be provided");
+        checkArgument(price >= 0, "price must be none negative");
         checkOrderMenus(orderMenus);
         checkArgument(createdAt != null, "createdAt must be provided");
 
         this.id = id;
+        this.orderType = orderType;
         this.price = price;
         this.orderMenus = orderMenus;
         this.createdAt = createdAt;
     }
 
-    public static Order create(List<OrderMenu> orderMenus) {
-        return new Order(orderMenus);
+    public static Order create(OrderType orderType, List<OrderMenu> orderMenus) {
+        return new Order(orderType, orderMenus);
     }
 
-    public static Order bind(Long id, int price, List<OrderMenu> orderMenus, LocalDateTime createdAt) {
+    public static Order bind(Long id, OrderType orderType, int price, List<OrderMenu> orderMenus, LocalDateTime createdAt) {
         checkArgument(id != null, "id must be provided for binding");
 
-        return new Order(id, price, orderMenus, createdAt);
+        return new Order(id, orderType, price, orderMenus, createdAt);
     }
 
     public void setId(Long id) {
         this.id = id;
     }
 
-    public void changeOrderMenus(List<OrderMenu> orderMenus){
+    public void changeOrderMenus(List<OrderMenu> orderMenus) {
         this.orderMenus = orderMenus;
     }
 

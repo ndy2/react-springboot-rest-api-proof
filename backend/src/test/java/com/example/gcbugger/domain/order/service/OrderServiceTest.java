@@ -10,6 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
 
+import static com.example.gcbugger.domain.order.domain.OrderType.TAKEOUT;
 import static org.assertj.core.api.Assertions.*;
 
 @SpringBootTest
@@ -29,7 +30,7 @@ class OrderServiceTest {
 
     @Test
     void 주문_성공(){
-        Order order = orderService.createOrder(6900, orderMenus);
+        Order order = orderService.createOrder(TAKEOUT, 6900, orderMenus);
 
         assertThat(order).isNotNull();
         assertThat(order.getPrice()).isEqualTo(6900);
@@ -44,6 +45,6 @@ class OrderServiceTest {
     @Test
     void 주문_메뉴로_계산한_가격과_입력받은_가격이_다른경우_주문_실패(){
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> orderService.createOrder(6800, orderMenus));
+                .isThrownBy(() -> orderService.createOrder(TAKEOUT, 6800, orderMenus));
     }
 }

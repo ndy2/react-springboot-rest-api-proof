@@ -63,6 +63,7 @@ INSERT INTO menu_option(menu_option_id, menu_type_id, menu_option_name, menu_opt
 CREATE TABLE orders
 (
     order_id    BIGINT      NOT NULL AUTO_INCREMENT,
+    order_type  VARCHAR(50) NOT NULL,
     order_price BIGINT      NOT NULL,
     created_at  DATETIME(6) NOT NULL,
 

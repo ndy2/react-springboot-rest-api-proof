@@ -20,7 +20,7 @@ public class MenuResponse {
     private List<MenuOptionResponse> options;
 
     public static MenuResponse of(Menu menu, List<MenuOption> options) {
-        if(options == null) options = new ArrayList<>();
+        if (options == null) options = new ArrayList<>();
         MenuResponse response = new MenuResponse();
         response.id = menu.getId();
         response.type = menu.getType().getName();

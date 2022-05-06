@@ -34,7 +34,7 @@ public class OrderService {
     }
 
     private void checkPrice(int price, Order order) {
-        if(!order.isOfPrice(price)){
+        if (!order.isOfPrice(price)) {
             throw new IllegalArgumentException(String.format("given price %d is not equal to calculated price %d", price, order.getPrice()));
         }
     }

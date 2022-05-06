@@ -33,11 +33,11 @@ public class MenuOption {
         this.price = price;
     }
 
-    public static MenuOption bind(Long id, MenuType menuType, String name, int price){
+    public static MenuOption bind(Long id, MenuType menuType, String name, int price) {
         return new MenuOption(id, menuType, name, price);
     }
 
-    public static MenuOption create(MenuType menuType, String name, int price){
+    public static MenuOption create(MenuType menuType, String name, int price) {
         return new MenuOption(menuType, name, price);
     }
 }

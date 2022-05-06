@@ -11,7 +11,7 @@ public class OrderMenuResponse {
     private final Long menuOptionId;
     private final int price;
 
-    public static OrderMenuResponse of (OrderMenu om){
+    public static OrderMenuResponse of(OrderMenu om) {
         return new OrderMenuResponse(om.getId(), om.getMenuId(), om.getMenuOptionId(), om.getPrice());
     }
 }

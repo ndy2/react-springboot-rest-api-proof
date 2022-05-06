@@ -17,6 +17,12 @@ import java.util.Map;
 public class JdbcMenuOptionRepository implements MenuOptionRepository {
 
     private static final String findByMenuTypeQuery = "SELECT * FROM menu_option o LEFT JOIN menu_type t ON t.menu_type_id = o.menu_type_id WHERE o.menu_type_id= :menuTypeId";
+    private static final RowMapper<MenuOption> menuOptionRowMapper = (rs, i) -> MenuOption.bind(
+            rs.getLong("menu_option_id"),
+            MenuType.bind(rs.getLong("menu_type_id"), rs.getString("menu_type_name")),
+            rs.getString("menu_option_name"),
+            rs.getInt("menu_option_price")
+    );
     private final NamedParameterJdbcTemplate jdbcTemplate;
 
     @Override
@@ -25,11 +31,4 @@ public class JdbcMenuOptionRepository implements MenuOptionRepository {
         Map<String, Object> paramMap = Collections.singletonMap("menuTypeId", menuTypeId);
         return jdbcTemplate.query(findByMenuTypeQuery, paramMap, menuOptionRowMapper);
     }
-
-    private static final RowMapper<MenuOption> menuOptionRowMapper = (rs, i) -> MenuOption.bind(
-            rs.getLong("menu_option_id"),
-            MenuType.bind(rs.getLong("menu_type_id"), rs.getString("menu_type_name")),
-            rs.getString("menu_option_name"),
-            rs.getInt("menu_option_price")
-    );
 }

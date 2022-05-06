@@ -12,11 +12,11 @@ import static java.time.LocalDateTime.now;
 @Getter
 public class Order {
 
-    private Long id;
     private final OrderType orderType;
     private final int price;
-    private List<OrderMenu> orderMenus;
     private final LocalDateTime createdAt;
+    private Long id;
+    private List<OrderMenu> orderMenus;
 
     private Order(OrderType orderType, List<OrderMenu> orderMenus) {
         this(null, orderType, retrievePrice(orderMenus), orderMenus, now());
@@ -45,6 +45,17 @@ public class Order {
         return new Order(id, orderType, price, orderMenus, createdAt);
     }
 
+    private static int retrievePrice(List<OrderMenu> orderMenus) {
+        checkOrderMenus(orderMenus);
+
+        return orderMenus.stream().map(OrderMenu::getPrice).mapToInt(i -> i).sum();
+    }
+
+    private static void checkOrderMenus(List<OrderMenu> orderMenus) {
+        checkArgument(orderMenus != null, "orderMenus must be provided");
+        checkArgument(orderMenus.size() > 0, "orderMenus must contain at least one orderMenu");
+    }
+
     public void setId(Long id) {
         this.id = id;
     }
@@ -55,16 +66,5 @@ public class Order {
 
     public boolean isOfPrice(int price) {
         return this.price == price;
-    }
-
-    private static int retrievePrice(List<OrderMenu> orderMenus) {
-        checkOrderMenus(orderMenus);
-
-        return orderMenus.stream().map(OrderMenu::getPrice).mapToInt(i -> i).sum();
-    }
-
-    private static void checkOrderMenus(List<OrderMenu> orderMenus) {
-        checkArgument(orderMenus != null, "orderMenus must be provided");
-        checkArgument(orderMenus.size() > 0, "orderMenus must contain at least one orderMenu");
     }
 }

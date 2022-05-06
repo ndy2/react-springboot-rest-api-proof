@@ -9,7 +9,7 @@ public class MenuOptionResponse {
     private String name;
     private int price;
 
-    public static MenuOptionResponse of(MenuOption menuOption){
+    public static MenuOptionResponse of(MenuOption menuOption) {
         MenuOptionResponse response = new MenuOptionResponse();
         response.id = menuOption.getId();
         response.name = menuOption.getName();

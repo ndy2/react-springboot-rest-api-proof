@@ -7,5 +7,4 @@ public class MenuOptionRequest {
 
     private final Long id;
     private final int price;
-
 }

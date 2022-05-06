@@ -7,10 +7,10 @@ import static com.google.common.base.Preconditions.checkArgument;
 @Getter
 public class OrderMenu {
 
-    private Long id;
     private final Long menuId;
     private final Long menuOptionId;
     private final int price;
+    private Long id;
 
     private OrderMenu(Long menuId, Long menuOptionId, int price) {
         this(null, menuId, menuOptionId, price);

@@ -21,14 +21,19 @@ public class JdbcMenuRepository implements MenuRepository {
     private static final String findAllQuery = "SELECT * FROM menu m LEFT JOIN menu_type t on m.menu_type_id=t.menu_type_id";
     private static final String findByTypeQuery = "SELECT * FROM menu m LEFT JOIN menu_type t on m.menu_type_id=t.menu_type_id WHERE menu_type_name= :typeName";
     private static final String findByIdQuery = "SELECT * FROM menu m LEFT JOIN menu_type t on m.menu_type_id=t.menu_type_id WHERE menu_id= :menuId";
-
+    private static final RowMapper<Menu> menuRowMapper = (rs, i) -> Menu.bind(
+            rs.getLong("menu_id"),
+            MenuType.bind(rs.getLong("menu_type_id"), rs.getString("menu_type_name")),
+            rs.getString("menu_name"),
+            rs.getInt("menu_price"),
+            rs.getInt("menu_kcal"),
+            rs.getString("menu_image_file_name"));
     private final NamedParameterJdbcTemplate jdbcTemplate;
 
     @Override
     public List<Menu> findAll() {
         return jdbcTemplate.query(findAllQuery, menuRowMapper);
     }
-
 
     @Override
     public List<Menu> findByType(MenuType type) {
@@ -45,12 +50,4 @@ public class JdbcMenuRepository implements MenuRepository {
             return Optional.empty();
         }
     }
-
-    private static final RowMapper<Menu> menuRowMapper = (rs, i) -> Menu.bind(
-            rs.getLong("menu_id"),
-            MenuType.bind(rs.getLong("menu_type_id"), rs.getString("menu_type_name")),
-            rs.getString("menu_name"),
-            rs.getInt("menu_price"),
-            rs.getInt("menu_kcal"),
-            rs.getString("menu_image_file_name"));
 }

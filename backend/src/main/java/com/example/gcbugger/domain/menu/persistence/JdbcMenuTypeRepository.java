@@ -14,6 +14,10 @@ import java.util.List;
 public class JdbcMenuTypeRepository implements MenuTypeRepository {
 
     private static final String findAllQuery = "SELECT * FROM menu_type";
+    private static final RowMapper<MenuType> menuTypeRowMapper = (rs, i) -> MenuType.bind(
+            rs.getLong("menu_type_id"),
+            rs.getString("menu_type_name")
+    );
     private final NamedParameterJdbcTemplate jdbcTemplate;
 
     @Override
@@ -21,10 +25,5 @@ public class JdbcMenuTypeRepository implements MenuTypeRepository {
 
         return jdbcTemplate.query(findAllQuery, menuTypeRowMapper);
     }
-
-    private static final RowMapper<MenuType> menuTypeRowMapper = (rs, i) -> MenuType.bind(
-            rs.getLong("menu_type_id"),
-            rs.getString("menu_type_name")
-    );
 
 }

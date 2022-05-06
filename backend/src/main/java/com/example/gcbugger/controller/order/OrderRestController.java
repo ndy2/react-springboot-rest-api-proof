@@ -24,7 +24,7 @@ public class OrderRestController {
     private final OrderService orderService;
 
     @PostMapping
-    public OrderResponse order(@RequestBody OrderRequest orderRequest){
+    public OrderResponse order(@RequestBody OrderRequest orderRequest) {
         OrderType orderType = OrderType.valueOf(orderRequest.getOrderType());
         int price = orderRequest.getPrice();
         List<OrderMenu> orderMenus = orderRequest.getOrderMenus().stream().map(OrderMenuRequest::toEntity).collect(Collectors.toList());

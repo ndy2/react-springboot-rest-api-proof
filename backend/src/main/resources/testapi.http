@@ -42,7 +42,7 @@ Accept: application/json
   "price" : 6900,
   "orderMenus" : [
     {
-      "menuId" : 1,
+      "menuId" : 100,
       "price" : 2300
     },
     {

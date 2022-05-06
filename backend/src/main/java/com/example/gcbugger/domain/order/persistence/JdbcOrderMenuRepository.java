@@ -2,6 +2,7 @@ package com.example.gcbugger.domain.order.persistence;
 
 import com.example.gcbugger.domain.order.domain.OrderMenuRepository;
 import com.example.gcbugger.domain.order.domain.entity.OrderMenu;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
@@ -36,9 +37,12 @@ public class JdbcOrderMenuRepository implements OrderMenuRepository {
 
     @Override
     public OrderMenu insert(Long orderId, OrderMenu orderMenu){
-        int count = jdbcTemplate.update(insertQuery, toParamSource(orderId, orderMenu), keyHolder);
-        checkState(count == 1, "amount of affected row of table orders caused by order insertion is not 1");
-
+        try {
+            int count = jdbcTemplate.update(insertQuery, toParamSource(orderId, orderMenu), keyHolder);
+            checkState(count == 1, "amount of affected row of table orders caused by order insertion is not 1");
+        } catch (DataAccessException e) {
+            throw new IllegalArgumentException(String.format("No such menuId : %d", orderMenu.getMenuId()), e);
+        }
 
         orderMenu.setId(keyHolder.getKey().longValue());
         return orderMenu;

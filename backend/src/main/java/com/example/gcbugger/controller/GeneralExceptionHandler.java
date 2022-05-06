@@ -18,7 +18,7 @@ public class GeneralExceptionHandler {
 
     private ResponseEntity<?> newResponse(Throwable throwable, HttpStatus status) {
         HttpHeaders headers = new HttpHeaders();
-        return new ResponseEntity<>(throwable.getMessage(), headers, status);
+        return new ResponseEntity<>(throwable.getClass().getSimpleName() + "\n" + throwable.getMessage(), headers, status);
     }
 
     @ExceptionHandler(NoHandlerFoundException.class)

@@ -1,5 +1,6 @@
 package com.example.gcbugger.controller.menu;
 
+import com.example.gcbugger.controller.menu.dto.MenuResponse;
 import com.example.gcbugger.domain.menu.domain.entity.Menu;
 import com.example.gcbugger.domain.menu.domain.entity.MenuOption;
 import com.example.gcbugger.domain.menu.domain.entity.MenuType;
@@ -10,12 +11,11 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static com.example.gcbugger.controller.menu.MenuResponse.of;
+import static com.example.gcbugger.controller.menu.dto.MenuResponse.of;
 import static java.util.stream.Collectors.*;
 
 @Slf4j

@@ -1,4 +1,4 @@
-package com.example.gcbugger.controller.menu;
+package com.example.gcbugger.controller.menu.dto;
 
 import com.example.gcbugger.domain.menu.domain.entity.Menu;
 import com.example.gcbugger.domain.menu.domain.entity.MenuOption;

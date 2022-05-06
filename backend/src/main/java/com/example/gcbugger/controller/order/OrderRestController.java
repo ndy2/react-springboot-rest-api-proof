@@ -1,9 +1,14 @@
 package com.example.gcbugger.controller.order;
 
+import com.example.gcbugger.controller.order.dto.OrderMenuRequest;
+import com.example.gcbugger.controller.order.dto.OrderRequest;
+import com.example.gcbugger.controller.order.dto.OrderResponse;
+import com.example.gcbugger.domain.order.domain.entity.Order;
 import com.example.gcbugger.domain.order.domain.entity.OrderMenu;
 import com.example.gcbugger.domain.order.service.OrderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,12 +23,11 @@ public class OrderRestController {
     private final OrderService orderService;
 
     @PostMapping
-    public OrderResponse order(OrderDto orderDto){
+    public OrderResponse order(@RequestBody OrderRequest orderRequest){
+        int price = orderRequest.getPrice();
+        List<OrderMenu> orderMenus = orderRequest.getOrderMenus().stream().map(OrderMenuRequest::toEntity).collect(Collectors.toList());
 
-        int price = orderDto.getPrice();
-        List<OrderMenu> orderMenus = orderDto.getOrderMenus().stream().map(OrderMenuDto::toEntity).collect(Collectors.toList());
-        orderService.createOrder(price, orderMenus);
-
-        return new OrderResponse();
+        Order order = orderService.createOrder(price, orderMenus);
+        return OrderResponse.of(order);
     }
 }
